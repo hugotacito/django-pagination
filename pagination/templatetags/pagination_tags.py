@@ -1,8 +1,3 @@
-try:
-    set
-except NameError:
-    from sets import Set as set
-
 from django import template
 from django.http import Http404
 from django.core.paginator import Paginator, InvalidPage
@@ -13,8 +8,8 @@ register = template.Library()
 DEFAULT_PAGINATION = getattr(settings, 'PAGINATION_DEFAULT_PAGINATION', 20)
 DEFAULT_WINDOW = getattr(settings, 'PAGINATION_DEFAULT_WINDOW', 4)
 DEFAULT_ORPHANS = getattr(settings, 'PAGINATION_DEFAULT_ORPHANS', 0)
-INVALID_PAGE_RAISES_404 = getattr(settings,
-    'PAGINATION_INVALID_PAGE_RAISES_404', False)
+INVALID_PAGE_RAISES_404 = getattr(settings, 'PAGINATION_INVALID_PAGE_RAISES_404', False)
+
 
 def do_autopaginate(parser, token):
     """
@@ -132,7 +127,7 @@ def paginate(context, window=DEFAULT_WINDOW):
     try:
         paginator = context['paginator']
         page_obj = context['page_obj']
-        page_range = paginator.page_range
+        page_range = list(paginator.page_range)
         # First and last are simply the first *n* pages and the last *n* pages,
         # where *n* is the current window size.
         first = set(page_range[:window])
