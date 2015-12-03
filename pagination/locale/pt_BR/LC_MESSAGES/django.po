@@ -20,10 +20,10 @@ msgstr ""
 
 #: pagination/templates/pagination/pagination.html:5
 #: pagination/templates/pagination/pagination.html:7
-msgid "anterior"
-msgstr ""
+msgid "previous"
+msgstr "anterior"
 
 #: pagination/templates/pagination/pagination.html:21
 #: pagination/templates/pagination/pagination.html:23
-msgid "proximo"
-msgstr ""
+msgid "next"
+msgstr "próximo"
