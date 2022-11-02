@@ -1,26 +1,33 @@
-{% if is_paginated %}
 {% load i18n %}
-<div class="pagination">
-    {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}" class="prev">&lsaquo;&lsaquo; anterior</a>
-    {% else %}
-        <span class="disabled prev">&lsaquo;&lsaquo; anterior</span>
-    {% endif %}
-    {% for page in pages %}
-        {% if page %}
-            {% ifequal page page_obj.number %}
-                <span class="current page">{{ page }}</span>
-            {% else %}
-                <a href="?page={{ page }}{{ getvars }}" class="page">{{ page }}</a>
-            {% endifequal %}
+
+{% if is_paginated %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}" class="prev">&laquo;</a>
         {% else %}
-            ...
+            <li class="disabled"><a href="#">&laquo;</a></li>
         {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}{{ getvars }}" class="next">próximo &rsaquo;&rsaquo;</a>
-    {% else %}
-        <span class="disabled next">próximo &rsaquo;&rsaquo;</span>
+        {% for page in pages %}
+            {% if page %}
+                {% if page == page_obj.number %}
+                    <li class="active"><span>{{ page }}</span></li>
+                {% else %}
+                    <li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page">{{ page }}</a></li>
+                {% endif %}
+            {% else %}
+                <li class="disabled"><span>...</span></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}" class="next">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><a href="#">&raquo;</a></li>
+        {% endif %}
+    </ul>
+
+    {% if show_all_button %}
+        <ul class="pagination">
+            <li><a href="?show_all=1{{ getvars }}{{ hashtag }}">Mostrar tudo</a></li>
+        </ul>
     {% endif %}
-</div>
 {% endif %}
